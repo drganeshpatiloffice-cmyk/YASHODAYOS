@@ -1,28 +1,56 @@
+'use client';
+
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
 interface CareerContextType {
   selectedClass: number | null;
   setSelectedClass: (classLevel: number) => void;
-  selectedCareer: string | null;
-  setSelectedCareer: (careerId: string) => void;
-  bookmarkedCareers: string[];
-  toggleBookmark: (careerId: string) => void;
-  isDarkMode: boolean;
-  setIsDarkMode: (isDark: boolean) => void;
+  selectedStream: string | null;
+  setSelectedStream: (stream: string) => void;
+  userProgress: {
+    completedModules: string[];
+    bookmarkedCareers: string[];
+    savedScholarships: string[];
+  };
+  addCompletedModule: (module: string) => void;
+  bookmarkCareer: (careerId: string) => void;
+  saveScholarship: (scholarshipId: string) => void;
 }
 
 const CareerContext = createContext<CareerContextType | undefined>(undefined);
 
 export const CareerProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [selectedClass, setSelectedClass] = useState<number | null>(null);
-  const [selectedCareer, setSelectedCareer] = useState<string | null>(null);
-  const [bookmarkedCareers, setBookmarkedCareers] = useState<string[]>([]);
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  const [selectedStream, setSelectedStream] = useState<string | null>(null);
+  const [userProgress, setUserProgress] = useState({
+    completedModules: [],
+    bookmarkedCareers: [],
+    savedScholarships: [],
+  });
 
-  const toggleBookmark = (careerId: string) => {
-    setBookmarkedCareers((prev) =>
-      prev.includes(careerId) ? prev.filter((id) => id !== careerId) : [...prev, careerId]
-    );
+  const addCompletedModule = (module: string) => {
+    setUserProgress((prev) => ({
+      ...prev,
+      completedModules: [...new Set([...prev.completedModules, module])],
+    }));
+  };
+
+  const bookmarkCareer = (careerId: string) => {
+    setUserProgress((prev) => ({
+      ...prev,
+      bookmarkedCareers: prev.bookmarkedCareers.includes(careerId)
+        ? prev.bookmarkedCareers.filter((id) => id !== careerId)
+        : [...prev.bookmarkedCareers, careerId],
+    }));
+  };
+
+  const saveScholarship = (scholarshipId: string) => {
+    setUserProgress((prev) => ({
+      ...prev,
+      savedScholarships: prev.savedScholarships.includes(scholarshipId)
+        ? prev.savedScholarships.filter((id) => id !== scholarshipId)
+        : [...prev.savedScholarships, scholarshipId],
+    }));
   };
 
   return (
@@ -30,12 +58,12 @@ export const CareerProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       value={{
         selectedClass,
         setSelectedClass,
-        selectedCareer,
-        setSelectedCareer,
-        bookmarkedCareers,
-        toggleBookmark,
-        isDarkMode,
-        setIsDarkMode,
+        selectedStream,
+        setSelectedStream,
+        userProgress,
+        addCompletedModule,
+        bookmarkCareer,
+        saveScholarship,
       }}
     >
       {children}
