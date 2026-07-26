@@ -1,11 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    domains: ['localhost'],
-    formats: ['image/avif', 'image/webp'],
-  },
   swcMinify: true,
+  images: {
+    unoptimized: true,
+  },
   experimental: {
     scrollRestoration: true,
   },
