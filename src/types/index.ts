@@ -1,126 +1,107 @@
-// Career Types
+export interface Scholarship {
+  id: string;
+  name: string;
+  provider: string;
+  amount: string;
+  eligibility: string[];
+  deadline: string;
+  applicationLink: string;
+  description: string;
+}
+
+export interface EntranceExam {
+  id: string;
+  name: string;
+  fullName: string;
+  stream: 'science' | 'commerce' | 'arts';
+  level: 'school' | 'undergraduate' | 'postgraduate';
+  eligibility: string;
+  examDate: string;
+  applicationDeadline: string;
+  syllabusLink: string;
+  resultDate: string;
+  cutoffMarks: string;
+  officialWebsite: string;
+}
+
+export interface CompetitiveExam {
+  id: string;
+  name: string;
+  organization: string;
+  category: 'civil-services' | 'police' | 'army' | 'railway' | 'banking' | 'ssc';
+  ageLimit: string;
+  eligibility: string;
+  salary: string;
+  vacancies: number;
+  examPattern: string;
+  syllabusUrl: string;
+}
+
 export interface Career {
   id: string;
   name: string;
   description: string;
   introduction: string;
-  educationalRoadmap: string[];
-  entranceExams: string[];
+  stream: 'science' | 'commerce' | 'arts';
   salary: {
     entry: string;
     mid: string;
     senior: string;
   };
+  educationalRoadmap: string[];
+  entranceExams: string[];
+  skillsRequired: string[];
   futureScope: string;
   governmentJobs: string[];
   privateJobs: string[];
-  skillsRequired: string[];
-  colleges: string[];
-  videos: string[];
-  category: string;
+  demandScore: number; // 1-10
+  growthRate: string;
 }
 
-// Exam Types
-export interface Exam {
+export interface Scheme {
   id: string;
   name: string;
-  shortName: string;
-  description: string;
-  eligibility: string;
-  examDate: string;
-  applicationDeadline: string;
-  syllabus: string[];
-  preparationStrategy: string;
-  books: string[];
-  videos: string[];
-  pdf?: string;
-  category: 'entrance' | 'competitive' | 'scholarship';
-  class?: number;
-}
-
-// Scholarship Types
-export interface Scholarship {
-  id: string;
-  name: string;
-  description: string;
-  eligibility: string;
-  benefits: string[];
+  category: 'scholarship' | 'financial-aid' | 'skill-development' | 'internship';
+  provider: string; // Government, NGO, Private
+  eligibility: string[];
+  benefits: string;
   applicationProcess: string;
-  applicationDeadline: string;
-  amount: string;
-  documents: string[];
-  website?: string;
+  deadline: string;
+  websiteLink: string;
 }
 
-// Opportunity Types
-export interface Opportunity {
+export interface FutureSkill {
   id: string;
   name: string;
+  category: 'technical' | 'soft-skills' | 'industry-specific' | 'emerging';
   description: string;
-  introduction: string;
-  benefits: string[];
-  eligibility: string;
-  preparationStrategy: string;
+  duration: string; // e.g., "3 months", "6 weeks"
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  prerequisites: string[];
   resources: {
     videos: string[];
-    pdfs: string[];
+    courses: string[];
     books: string[];
   };
-  category: string;
-  classLevel: number;
+  careerApplications: string[];
+  demandInMarket: number; // 1-10
 }
 
-// Course Types
-export interface Course {
-  id: string;
-  name: string;
-  description: string;
-  duration: string;
-  eligibility: string;
-  careers: string[];
-  colleges: string[];
-  salary: string;
-  category: string;
-}
-
-// Stream Types
-export interface Stream {
-  id: string;
-  name: string;
-  description: string;
-  subjects: string[];
-  careers: string[];
-  exams: string[];
-  courses: string[];
-}
-
-// User Types
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  classLevel: number;
-  stream?: string;
-  preferences: string[];
-  bookmarkedCareers: string[];
-  bookmarkedExams: string[];
-}
-
-// News & Announcement Types
 export interface News {
   id: string;
   title: string;
   content: string;
-  image?: string;
-  date: Date;
+  date: string;
   category: string;
+  imageUrl?: string;
   link?: string;
 }
 
 export interface Announcement {
   id: string;
   title: string;
-  description: string;
-  date: Date;
-  priority: 'high' | 'medium' | 'low';
+  message: string;
+  date: string;
+  priority: 'low' | 'medium' | 'high';
+  expiryDate: string;
 }
