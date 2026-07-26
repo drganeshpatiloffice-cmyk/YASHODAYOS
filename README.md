@@ -55,7 +55,7 @@ YASHODAYOS is a comprehensive career guidance and educational planning platform 
 - Relevance-based ranking
 - Real-time suggestions
 
-### 🎛️ Admin Panel
+### 🖥️ Admin Panel
 - CRUD operations for all content
 - Manage careers, scholarships, exams, and skills
 - Add news and announcements
